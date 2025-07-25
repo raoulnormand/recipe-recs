@@ -6,7 +6,7 @@ Script to create the webapp with Streamlit.
 
 import streamlit as st
 
-from src.recommendations import get_recommendations
+from .src.recommendations import get_recommendations
 
 # Build app
 
