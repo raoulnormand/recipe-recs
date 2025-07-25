@@ -20,6 +20,7 @@ nb_queries = st.text_input("How many recipes do you want? Default is 5.")
 if st.button("Show me!"):
     st.write("Here are our recommendations!")
     if not nb_queries:
-        nb_queries = None
-    recs = get_recommendations(query, int(nb_queries))
+        recs = get_recommendations(query)
+    else:
+        recs = get_recommendations(query, int(nb_queries))
     st.dataframe(recs, use_container_width=True)
