@@ -6,6 +6,7 @@ of the recipes_urls.txt file.
 # Imports
 
 import time
+from pathlib import Path
 from random import randint
 
 from src.scraping import soupify
@@ -34,11 +35,12 @@ def main():
     to a csv file.
     """
     # Save instructions from each url in a csv file
+    main_dir = Path(__file__).parent.parent
     with open(
-        "./results/recipes_instructions.csv", "w", encoding="utf-8"
+        main_dir / "/results/recipes_instructions.csv", "w", encoding="utf-8"
     ) as recipes_instructions:
-        recipes_instructions.write("url, instructions\n")
-        with open("./results/recipes_urls.txt", "r") as recipes_urls:
+        recipes_instructions.write("url,instructions\n")
+        with open(main_dir / "/results/recipes_urls.txt", "r") as recipes_urls:
             for url in recipes_urls:
                 instructions = get_instructions(url)
                 # Only add if there are instructions, i.e. the link is to a recipe
