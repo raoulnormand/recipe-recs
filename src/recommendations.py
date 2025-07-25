@@ -9,7 +9,7 @@ from pickle import load
 
 import numpy as np
 import pandas as pd
-from sklearn.metrics.pairwise import cosine_similarity
+import sklearn
 
 from src.data_processing import process
 
@@ -29,7 +29,7 @@ def get_recommendations(query, nb_results=5):
     # Process and evctorize the query
     query_vec = vectorizer.transform([process(query)])
     # Compute cosine similarity
-    cossim = cosine_similarity(model, query_vec)
+    cossim = sklearn.metrics.pairwise.cosine_similarity(model, query_vec)
     # Return best results in decreasing order
     indices = np.argsort(cossim.flatten())[: -nb_results - 1 : -1]
     df = pd.read_csv(main_dir / "results/recipes_instructions.csv")
