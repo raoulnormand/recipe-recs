@@ -4,7 +4,6 @@ Script to create the webapp with Streamlit.
 
 # Imports
 
-import sklearn
 import streamlit as st
 
 from src import recommendations
