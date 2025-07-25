@@ -6,7 +6,7 @@ Script to create the webapp with Streamlit.
 
 import streamlit as st
 
-from .src.recommendations import get_recommendations
+from src import recommendations.get_recommendations
 
 # Build app
 
@@ -21,5 +21,5 @@ if st.button("Show me!"):
     st.write("Here are our recommendations!")
     if not nb_queries:
         nb_queries = 5
-    recs = get_recommendations(query, int(nb_queries))
+    recs = recommendations.get_recommendations(query, int(nb_queries))
     st.dataframe(recs, use_container_width=True)
