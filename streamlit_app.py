@@ -6,7 +6,7 @@ Script to create the webapp with Streamlit.
 
 import streamlit as st
 
-from src.recommendations import get_recommendations
+from src import recommendations
 
 # Build app
 
@@ -20,7 +20,7 @@ nb_queries = st.text_input("How many recipes do you want? Default is 5.")
 if st.button("Show me!"):
     st.write("Here are our recommendations!")
     if not nb_queries:
-        recs = get_recommendations(query)
+        recs = recommendations.get_recommendations(query)
     else:
-        recs = get_recommendations(query, int(nb_queries))
+        recs = recommendations.get_recommendations(query, int(nb_queries))
     st.dataframe(recs, use_container_width=True)
