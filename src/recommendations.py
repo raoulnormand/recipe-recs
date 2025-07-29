@@ -32,5 +32,5 @@ def get_recommendations(query, nb_results=5):
     cossim = cosine_similarity(model, query_vec)
     # Return best results in decreasing order
     indices = np.argsort(cossim.flatten())[: -nb_results - 1 : -1]
-    df = pd.read_csv(main_dir / "results/recipes_instructions.csv")
+    df = pd.read_csv(main_dir / "results/recipes_ingredients.csv")
     return df.loc[indices, "url"]

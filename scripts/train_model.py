@@ -8,7 +8,7 @@ from pathlib import Path
 from pickle import dump
 
 import pandas as pd
-from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.feature_extraction.text import CountVectorizer
 
 from src.data_processing import process
 
@@ -21,11 +21,11 @@ def main():
     """
     # Process the instructions text
     main_dir = Path(__file__).parent.parent
-    df = pd.read_csv(main_dir / "results/recipes_instructions.csv")
-    df["instructions"] = df["instructions"].apply(process)
+    df = pd.read_csv(main_dir / "results/recipes_ingredients.csv")
+    df["ingredients"] = df["ingredients"].apply(process)
     # Define model
-    vectorizer = TfidfVectorizer(min_df=0.001)
-    model = vectorizer.fit_transform(df["instructions"])
+    vectorizer = CountVectorizer(ngram_range=(1, 2))
+    model = vectorizer.fit_transform(df["ingredients"])
     # Pickle vectorizer and model
     with open(main_dir / "results/vectorizer.pkl", "wb") as f:
         dump(vectorizer, f)
