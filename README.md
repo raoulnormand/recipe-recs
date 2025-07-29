@@ -14,7 +14,7 @@ Try it [here](https://recipe-recs.streamlit.app/)!
 
 Using either the web app or the `get_recommendations` function, a request for "chicken with mushroom and onions" would yield the following results.
 
-- [Ginger chicken and rice]("https://www.recipetineats.com/ginger-chicken-and-rice/)
+- [Ginger chicken and rice](https://www.recipetineats.com/ginger-chicken-and-rice/)
 
 - [Chicken tetrazzini pasta bake](https://www.recipetineats.com/chicken-tetrazzini-pasta-bake/)
 
