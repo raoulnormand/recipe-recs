@@ -1,6 +1,5 @@
 """
-Scrapes recipes from recipetineats.com, using the list of urls
-of the recipes_urls.txt file.
+Scrapes ingredients from the recipes of recipetineats.com, using the list of urls of the recipes_urls.txt file.
 """
 
 # Imports
@@ -14,13 +13,13 @@ from src.scraping import soupify
 # Functions
 
 
-def get_instructions(url):
+def get_ingredients(url):
     """
     Gets the recipe instructions on the given page.
     """
     recipe = soupify(url)
     # Instructions are listed with the class below
-    instructions_list = recipe.find_all("div", class_="wprm-recipe-instruction-text")
+    instructions_list = recipe.find_all("span", class_="wprm-recipe-ingredient-name")
     # Get only the text and concatenate
     instructions_text = [instruction.get_text() for instruction in instructions_list]
     return " ".join(instructions_text)
@@ -37,17 +36,19 @@ def main():
     # Save instructions from each url in a csv file
     main_dir = Path(__file__).parent.parent
     with open(
-        main_dir / "results/recipes_instructions.csv", "w", encoding="utf-8"
-    ) as recipes_instructions:
-        recipes_instructions.write("url,instructions\n")
-        with open(main_dir "/results/recipes_urls.txt", "r") as recipes_urls:
+        main_dir / "results/recipes_ingredients.csv", "w", encoding="utf-8"
+    ) as recipes_ingredients:
+        recipes_ingredients.write("url,ingredients\n")
+        with open(
+            main_dir / "results/recipes_urls.txt", "r", encoding="utf-8"
+        ) as recipes_urls:
             for url in recipes_urls:
-                instructions = get_instructions(url)
-                # Only add if there are instructions, i.e. the link is to a recipe
-                if instructions:
+                ingredients = get_ingredients(url)
+                # Only add if there are ingredients, i.e. the link is to a recipe
+                if ingredients:
                     # Replace , by ; to avoid issues in csv
-                    instructions = instructions.replace(",", ";")
-                    recipes_instructions.write(url.strip() + ", " + instructions + "\n")
+                    ingredients = ingredients.replace(",", ";")
+                    recipes_ingredients.write(url.strip() + ", " + ingredients + "\n")
                 time.sleep(randint(1, 3))
 
 
